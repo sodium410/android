@@ -96,24 +96,78 @@ Each application runs in its own process, and thus, IPC has to make sure that ap
 main component that represents a single screen with a user interface responsible for managing user interaction with the application, and can be started by other Activities, apps, or system events.  
 Activities are also responsible for managing the app's lifecycle.  
 To start an Activity programmatically, we first create an Intent object. Intents are messaging objects used to request an action. startActivity(intent);  
-to use an Activity properly, you must declare it in your app's manifest file.  
+to use an Activity properly, you must declare it in your app's **manifest file**.  
 example: login screen  
 
 **Services**  
 component that performs long-running operations in the background without providing a user interface.  
 example -- downloading files, playing music even after user left the app  
 startService() method  
-Bound Service --  other application components to bind to them by calling the bindService() method.  
+Bound Service --  other application components to bind to them by calling the **bindService()** method.  
 
 **Broadcast Receivers**  
- Broadcast Receivers are designed to respond to system-wide or custom events broadcasted by other applications.  
- For example, the system broadcasts an event when the device starts charging.  
- let other apps know file downloaded etc  
- Broadcast Receivers also need to be declared in the AndroidManifest.xml file.  
+Broadcast Receivers are designed to respond to system-wide or custom events broadcasted by other applications.  
+For example, the system broadcasts an event when the device starts charging.  
+let other apps know file downloaded etc  
+Broadcast Receivers also need to be declared in the **AndroidManifest.xml** file.  
 
- 
+**Content Providers**  
+they act as the intermediate between the app and its underlying data storage.  
+Create, Read, Update, Delete operations on data stores such as  
+local SQLite databases, the device's internal or external storage, or even on a remote server.  
+Activity-->CursorLoader-->ContentResolver-->ContentProvider-->Data Storage  
+Content Providers, along with the permissions required to access the provider's data, must be declared in the **AndroidManifest.xml** file.  
 
+**Intents**  
+Intents are messaging objects used by applications or the Android system to request actions from other components such as Activities, Services, and Broadcast receivers.  
+starting an activity -- navigating from list of contacts to specific selected contact  
+starting a service --Downloading a file in the background  
+Delivering a Broadcast --  Informing other components that the battery is low  
+Explicit Intents -- Explicit Intents are commonly used for navigating between activities within the same app or starting services.  
+Implicit Intents -- Implicit Intents are used when we don't know the exact target component  
+In addition, Intents can also carry data between components in the form of key-value pairs called Extras - putExtra().  
 
+Understanding and analyzing Intents while assessing an application is crucial—not only for  
+gaining insight into the app’s flow but also for identifying potential security bypasses
+
+**Binders**  
+The Binder is Android's core Interprocess Communication (IPC) mechanism, enabling efficient and secure communication between different processes.  
+remote service can refers to a service running within the same application but in a different process  
+Binders are not declared in the manifest file directly, as they are a part of the Service implementation.  
+However, if the Service runs in a different process, the attribute android:process should be specified in the AndroidManifest.xml file as remote process.  
+
+**DeepLinks**  
+A Deep Link is an Interprocess Communication (IPC) mechanism that allows users to navigate directly to specific content within an app  
+by tapping a URL found on a website, email, or SMS  
+example -- amazon sale email clicking link takes me to produc on amazon app, if not installed redirected to app store to install.  
+Two types -- Standard deep link and Android App link  
+To enhance security when using Deep Links, it is suggested to use Android App Links (which ensure links are verified and securely handled) instead of generic Deep Links.  
+we must set up an intent filter in the Androidmanifest.xml file for the corresponding activity  
+
+**Android Emulators**  
+programs allowing users to run Android applications and simulate the Android operating system on devices like personal computers.  
+Android Virtual Device (AVD) -- Android Studio's AVD is a fast and feature-rich emulator  
+In a new Android project, navigate to Tools -> Device Manager --> Create device  
+system images that only include Google APIs will allow elevated privileges (root) by using the ADB tool through the terminal  
+
+Other Emulators -- Corellium - both Android and iOS with web based interface, Genymotion, Bluestacks, NoxPlayer, Memu PLay, LDplayer  
+
+**Android Debug Bridge**  
+ADB is a versatile command-line tool that enables communication between a computer and a device.  
+shell to the device emulated  
+allows developers to perform tasks like installing and debugging applications, transferring files between the host computer and the device  
+apt-get install adb -- can also be installed on windows and ios  
+adb start-server   /facilitates ineraction between adb client shell and adb daemon on the emulated device  
+adb devices -- list devices  
+adb push ./test.apk /data   -- copy file to device  
+adb shell whoami  
+adb shell  //shell to the device  then ls -l /sdcard/  
+adb root  
+The adb root command restarts the ADB daemon (adbd) on the Android emulator with root privileges. gives root perms on device  
+as mentioned earlier in the Android Emulators section, only system images labeled with Google APIs will provide this feature.  
+System images labeled with Google Play are signed with a release key, and elevated privileges (root) are not supported.  
+
+**Application Pentesting Methodology and Tools**  
 
 
 
