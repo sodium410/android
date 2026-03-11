@@ -159,27 +159,40 @@ allows developers to perform tasks like installing and debugging applications, t
 apt-get install adb -- can also be installed on windows and ios  
 adb start-server   /facilitates ineraction between adb client shell and adb daemon on the emulated device  
 adb devices -- list devices  
-adb push ./test.apk /data   -- copy file to device  
+adb push ./test.apk /sdcard/Download/    -- copy file to device  
+adb pull /sdcard/Download/myapp.apk .   -- downoad file from device  
 adb shell whoami  
 adb shell  //shell to the device  then ls -l /sdcard/  
+adb install myapp.apk   //install the app  
 adb root  
 The adb root command restarts the ADB daemon (adbd) on the Android emulator with root privileges. gives root perms on device  
 as mentioned earlier in the Android Emulators section, only system images labeled with Google APIs will provide this feature.  
 System images labeled with Google Play are signed with a release key, and elevated privileges (root) are not supported.  
 
-**Application Pentesting Methodology and Tools**  
+**Setting up ADB for a real device**  
+enable USB Debugging on Android device  
+Settings -> About phone or About device or About emulated device, find the Build number, and tap on it seven times.  
+This will display the message You are now a developer!.  
+Settings -> Developer Options or Settings -> System -> Developer Options  -> Enable USB debugging  
+Once enabled, we can connect the device to the computer using a USB cable. When prompted on the device, choose File transfer or MTP mode.  
+verify connection by runing adb devices  
+To run adb root -- the device has to be **rooted first**  
 
+**Application Pentesting Methodology**  
+1. Planning and environment setup - scope, permissions, setup testing env with tools and emulators
+2. Enumeration and Information gathering -- functions, architecture etc  
+3. Static analysis 4. Dynamic analysis 5. Documenting and Reporting  
 
+**Suggested Tools**  
+ADB - debugger  
+JADX -- essential for reverse engineering  
+APKTool -- reverse ngineering android apps - view souce code also allows to modify  
+Ghidra -- often used to analyze native c++ libraries loaded to the app  
+Burp Suite  - web proxy  
+Frida -- inject custom JavaScript or library code into running processes  
+Autospy - forensics tool  
 
-
-
-
-
-
-
-
-
-
-
-
+**Automated Tools**   
+mobSF - automaed static, dynamic and malware analysis on mobile apps  
+Drozer, Qark, Objection, Medusa, Androbugs    
 
