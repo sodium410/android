@@ -87,6 +87,26 @@ Flutter -- use IDE like Android studio
 Xamarin -- cross platform supports Android IOS and desktop apps  
 React Native, Apache Cordova and others  
 
+## Androind Application Components and Interprocess communication  
+These components are declared in the AndroidManifest.xml and can be used individually or in tandem with one another.  
+Interprocess Communication (IPC) is a mechanism that allows for communication between applications or different processes within the same application.  
+Each application runs in its own process, and thus, IPC has to make sure that applications have a way to communicate with each other when necessary.  
+
+**Activities**  
+main component that represents a single screen with a user interface responsible for managing user interaction with the application, and can be started by other Activities, apps, or system events.  
+Activities are also responsible for managing the app's lifecycle.  
+To start an Activity programmatically, we first create an Intent object. Intents are messaging objects used to request an action. startActivity(intent);  
+to use an Activity properly, you must declare it in your app's manifest file.  
+example: login screen  
+
+**Services**  
+component that performs long-running operations in the background without providing a user interface.  
+example -- downloading files, playing music even after user left the app  
+startService() method  
+Bound Service --  other application components to bind to them by calling the bindService() method.  
+
+**Broadcast Receivers**  
+
 
 
 
