@@ -106,7 +106,12 @@ startService() method
 Bound Service --  other application components to bind to them by calling the bindService() method.  
 
 **Broadcast Receivers**  
+ Broadcast Receivers are designed to respond to system-wide or custom events broadcasted by other applications.  
+ For example, the system broadcasts an event when the device starts charging.  
+ let other apps know file downloaded etc  
+ Broadcast Receivers also need to be declared in the AndroidManifest.xml file.  
 
+ 
 
 
 
