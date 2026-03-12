@@ -3,3 +3,6 @@ wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.3.1.14/andr
 tar xvzf android-studio-2024.3.1.14-linux.tar.gz  
 sh android-studio/bin/studio.sh  
 
+**Android Debug Bridge - ADB**  
+apt-get install adb  
+
