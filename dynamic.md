@@ -62,6 +62,10 @@ expand Advanced options, and under Proxy, choose Manual. Enter the burp IP and p
 IDOR, infor disclosure and other API/Web attacks can be tried based on the request responses  
 
 **SSL/TLS Certificate pinning bypass** 
+**SSL Pinning**. 
+Normally, the app establishes a direct, end-to-end encrypted connection with the backend server and verifies its identity against a hardcoded certificate or public key hash.  
+If a proxy is placed in the middle: The proxy presents its own certificate to the app.  
+The app detects that the certificate does not match its hardcoded pin and immediately drops the connection.  
 ensures that the app communicates only with a trusted server by verifying the server’s certificate against a copy embedded in the app.  
 is a security measure designed to prevent man-in-the-middle (MITM) attacks. or say burp interception for testers  
 has a hash of the cert in network config file under res/xml directory  
