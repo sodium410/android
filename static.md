@@ -70,6 +70,14 @@ Smali is a low-level, assembly-like language used by the Dalvik Virtual Machine 
 To be continued switching to Dynamic analysis  
 
 
+## TCM Security  
+Injured android - not there anymore on playstore  
+install your app to test from playstore.  
+pm list packages | grep injured  //find the apk path of the installed app / pm package manager.  
+adb pull /datapp/~~/path/base.apk Injuredapppulled.apk   //pull an apk from installed, use this apk to run on rooted non playstore machine.  
+
+Insecure apps for testing from owasp - https://mas.owasp.org/MASTG/apps/android/MASTG-APP-0001/  
+
 
 
 
