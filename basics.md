@@ -152,7 +152,7 @@ system images that only include Google APIs will allow elevated privileges (root
 
 Other Emulators -- Corellium - both Android and iOS with web based interface, Genymotion, Bluestacks, NoxPlayer, Memu PLay, LDplayer  
 
-**Android Debug Bridge**  
+**Android Debug Bridge**  //part of Android studio install  
 ADB is a versatile command-line tool that enables communication between a computer and a device.  
 shell to the device emulated  
 allows developers to perform tasks like installing and debugging applications, transferring files between the host computer and the device  
