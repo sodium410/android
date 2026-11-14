@@ -38,14 +38,28 @@ AVD with play store not root by default hence.
 use the playstore avd to install the apk if not avaialble on apkmirror.  
 then stop the playstore avd instance and use the non playstore instance for root access.  
 or use script to root the same avd using magisc - this gets flagged by defender  
+if apk shared not on store yet - then allow install from storage to install.  
 
 adb shell  
 adb root  
 adb whoami  //root.  
 
-**SSL Pinning**. 
-Normally, the app establishes a direct, end-to-end encrypted connection with the backend server and verifies its identity against a hardcoded certificate or public key hash. 
-If a proxy is placed in the middle: The proxy presents its own certificate to the app. The app detects that the certificate does not match its hardcoded pin and immediately drops the.   connection.
+**Accessing ADB shell from a VM or remote network device.**  -- is also possible - google when necessary.  
+
+**Other emulator options:** Genymotion - both cloud and desktop versions., Xamarin and Visual studio emulator for android  
+
+**Physical Device Setup**.  
+no android studio required if physical device used - rooted  
+Connect with usb/type c port  
+Settings->system/advanced-->enable developer mode on the device  and enable usb debugging.  
+adb shell will now get into the physical device.  
+can use stay awake feature and not turn off is helpful.  
+
+**Common Emulator issues**  
+some AVD's latest dont have proxy setting in the extended settings  
+File--Settings--Emulator--Launch in tool window uncheck - allows extended settings enabled.  
+
+
 
 
 
