@@ -78,6 +78,79 @@ adb pull /datapp/~~/path/base.apk Injuredapppulled.apk   //pull an apk from inst
 
 Insecure apps for testing from owasp - https://mas.owasp.org/MASTG/apps/android/MASTG-APP-0001/  
 
+**Android Manifest.xml**  
+Is where the basics of the applications are defined such as minSDKversion, Permissions, activities, content providers.  
+Permissions - what the app needs access to -- contacts, camera, internet, bluetooth etc.  
+list of all permissions is listed in the developer.android.com. with descriptions  
+Activities - basically UI elements/different screens in the app - example accounts, profile page etc.  
+All activities must be defined in manifest along with whether exported=true or false to allow other apps to launch/not.  
+Intent filter -- 2 types implicit and explicit intents.  
+Explicit intents - Inside activities, to connect pages with data ex: whatsapp homepage to chat with specific user.  
+implicit intents -  opening whatsapp say from chrome webpage - So whatspp should define this implicit filter in manifest. 
+Only 1 explicit intent in manifest pointing to main page, rest all implicit intents.  
+android:exported="true" is required on Android 12 and higher so external apps like Chrome are allowed to launch that WhatsApp Activity.  
+Activities can also be exposed outside of the application -- setting exported=true in the activity. shouldn;t allow to get say profile from login page.  
+You define these intents, activities, deeplinks etc in AndroidManifest.xml so the Android OS knows what your app can do before your app is ever launched or running in memory.  
+Because Android manages battery and RAM strictly, **most installed apps are completely shut down in the background** Android cannot run your Kotlin/Java code to ask,  
+"Hey WhatsApp, can you handle shared links?" Instead, Android reads your app's static AndroidManifest.xml file at installation time.  
+
+Also for security and sandboxing --  
+By default, one app cannot open another app's screens. Declaring an <intent-filter> (paired with android:exported="true") acts as an explicit security permission slip telling Android, "It is safe for external apps to launch this specific Activity, and only for these specific data types.  
+Deep links say whatsapp and chrome - chrome defines deep links to catch all https, while whatsapp if opening from chrome is limited to  
+Why link in chrome opens whatsapp when both has same deep links catchers ? exact host match has higher preference and another reason of 
+deep links are part of activity, cannot be freely floating, androind should know which screen to open when link is clicked.  
+
+Content providers - serve data from app to other, example contacts app shares contacts with whatsapp.  
+if exported true can expose data to any user or app on the device.  
+but exported should be true for other apps to access even with contacts permission.  
+with androind.readpermission explicitly given to whatsapp to read contacts.  
+on phone settings its simply allow access to contacts but in the code developer must declare read vs write.  
+
+4 core components androidmanifest.xml. 
+Activity, Service(for background service - message sync,), Broadcast receiver, content provider. 
+Broadcast receiver -- whatsapp otp auto fill after google sms retriver sends broadcast. 
+Service -- play a voice note in whatsapp chat and open gmai audio continues in background with a notification its running.  
+
+Singning -- v1 is bad and has some issues - can be repacked with malicious content.  
+V2 and V3 is the latest, apk signture shows google but sha2 is different for each app. 
+app on google playstore are signed by google play  
+developer simply logins to play console, uploads their android app bundle soda.aab signed with upload key.(signed with private and uploaded is public key).  
+when user tries to install app from playstore, google play generates the apk and signs it with dedicated app signing key stored in googles hsm.  
+
+The app is installed in /system which is not accessible from folder explorer without rooting.  
+The app stores its runtime data such as images, chat backup etc on Android/data/package_name folder.  
+ok whatapp stores chats in /data/data/com.whatsapp --requires root,  while local backups and media files on Android/med or Android/data - no root required.  
+
+whatsapp does encrypt whatsapp chat backups, if someone steals it they cannot decrypt without key stored in /data/data which requires root access.  
+Android/data - hides media from gallery.  
+/Android/Media/com.whatsapp  -- allows gallery to index photos.  
+
+Note: Unlike traditional desktop operating systems where the user control when a program opens and closes,  
+Android completely controls the apps lifecycle - pausing, stopping or terminating processes to manage limited mobile power and memory resources.  
+Desktop apps run as a continous single entry process main(), While android apps broken into independent components(activities,services) that android can destroy and recreate individually.  
+Desktop apps stays in memory until closed, Android app must constantly saves its UI state because Android can kill it mid-use. 
+Android kills older background processes to free memory for active apps, swiping away or leaving an app puts it in a cached background
+Android acts as a central manager of the phone it needs a complete  
+Because the android  acts as the central manager of phone it needs a complete blueprint of every app and AndroidManifest.xml serves as that blueprint.  
+Why Manifest ? no single entry point, check what permissions app requires defined, minSDK defined.  
+Right before app goes into background, app to save its instance state in the memoryRAM protected system process  
+Activity record -- whenver you open a new screen activity record is created in memory holds the name of the screen, the intent that launche it and its position. 
+Attached to this record is the bundle of UI data example typed text or scroll position 
+
+• App Open: Activity (displays buttons) \(\leftrightarrow \) Service (plays music + updates notification).  
+• App Closed: Activity is gone. Notification (displays mini buttons) \(\leftrightarrow \) Service (still playing music).  
+So for music app services form majority, for banking app activity as everything requires user interaction.  
+No, a Service does not have a user interface (UI) A Foreground Service must display a notification in the status bar (like a music player controller or a file download progress bar).  
+However, the Android System UI draws that notification—the Service just sends text and icons to the system.  
+
+
+
+
+
+
+
+
+
 
 
 
