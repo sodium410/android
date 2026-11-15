@@ -143,6 +143,14 @@ So for music app services form majority, for banking app activity as everything 
 No, a Service does not have a user interface (UI) A Foreground Service must display a notification in the status bar (like a music player controller or a file download progress bar).  
 However, the Android System UI draws that notification—the Service just sends text and icons to the system.  
 
+**Manual Static analysis.**  
+apktool d test.apk     //decompile with apktool can use jadxui.  
+Check the AndroidManifest.xml and other files for secrets, exported activities, backup, strings.  
+
+**How to find hardcoded strings**.  
+often found in resources/strings.xml. 
+can also be found in activity source code. 
+Threat vectors: login bypass if creds leaked,urls exposed, api keys exposed, firebase urls firebase.io.  
 
 
 
